@@ -1,26 +1,18 @@
-
 async function loadProducts() {
-  const container = document.getElementById('productContainer');
   try {
-    const files = ['products/example.json']; // add more if needed
-    for (let file of files) {
-      const res = await fetch(file);
-      const data = await res.json();
-
-      const card = document.createElement('div');
-      card.className = 'product-card';
-      card.innerHTML = `
-        <h3>${data.name}</h3>
-        <p>${data.desc}</p>
-        <p><b>${data.price}</b></p>
-        <a href="${data.payment}" target="_blank">
-          <button>Buy Now</button>
-        </a>
-      `;
-      container.appendChild(card);
-    }
+    const res = await fetch('/products/index.json');
+    if (!res.ok) throw new Error('Failed to load products');
+    const products = await res.json();
+    const container = document.getElementById('product-list');
+    container.innerHTML = '';
+    products.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'product';
+      div.innerHTML = `<h2>${p.title}</h2><p>${p.description}</p><strong>$${p.price}</strong>`;
+      container.appendChild(div);
+    });
   } catch (err) {
-    console.error("Error loading products:", err);
+    document.getElementById('product-list').innerText = 'No products found.';
   }
 }
 loadProducts();

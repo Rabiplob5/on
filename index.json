@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Sample Product 1",
+    "description": "This is a sample description.",
+    "price": 10,
+    "image": "/images/uploads/sample1.png"
+  },
+  {
+    "title": "Sample Product 2",
+    "description": "Another product description.",
+    "price": 20,
+    "image": "/images/uploads/sample2.png"
+  }
+]
